@@ -2,7 +2,10 @@
 
 int main()
 {
-    InitWindow(350, 200, "Axe Game");
-    SetTargetFPS(60);
-    
+float hellothere = 1.99f;
+
+    int width = 350;
+    int height = 200;
+
+    InitWindow(width , height, "Axe Game"); 
 }
