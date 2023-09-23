@@ -2,6 +2,9 @@
 
 int main()
 {
+    //Score
+    int score = 0;
+
     // Window dimensions
     int width = 800;
     int height = 450;
@@ -24,8 +27,8 @@ int main()
     int rectY = 0;
 
     // Rectangle Direction and Speed
-    int direction = 1;
-
+    int directionV = 1;
+    int directionH = 1;
     // Rectangle Dimensions
     int rectWidth = 50;
     int rectHeight = 50;
@@ -56,7 +59,9 @@ int main()
     {
         if(collision)
       {
+        BeginDrawing();
         DrawText("Game Over", 400, 200, 20, RED);
+        EndDrawing();
       }
       else
       {
@@ -84,15 +89,26 @@ int main()
 
         DrawCircle(x, y, radius, BLUE);
         DrawRectangle(rectX, rectY, rectWidth, rectHeight, RED);
-
+        DrawText(TextFormat("Score = %i", score), 0, 0, 50, BLACK);
+        DrawText("Controls : Arrow keys to Move", 0, 350, 20, BLACK);
+        DrawText("Dodge the Red Square", 0, 400, 20, BLACK);
         // Move The Rectangle ( Axe )
 
-        rectY += direction * axeSpeed;
+        rectY += directionV * axeSpeed;
 
-        if(rectY > height || rectY < 0)
+        if(rectY > (height - rectHeight) || rectY < 0)
         {
-            direction *= -1;
+            directionV *= -1;
+            score += 1;
         }
+
+        rectX += directionH * axeSpeed;
+
+        if (rectX > (width - rectWidth ) || rectX < 0)
+            {
+                directionH *= -1;
+                score += 1;
+            }
 
         // use a switch statement to check for key presses
         switch(GetKeyPressed())
